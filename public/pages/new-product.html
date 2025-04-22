@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/style.css" />
+    <link rel="stylesheet" href="../css/new-produc.css" />
+  </head>
+  <body>
+    <header>
+      <h1>فروشگاه جادویی ✨</h1>
+      <input type="text" id="searchInput" placeholder="جستجو کن..." />
+      <div id="cartCount">🛒 ۰</div>
+      <div id="AddNewProduct">
+        <a href="./new-product.html">🛒محصول جدید</a>
+      </div>
+    </header>
+
+    <main>
+      <div class="box container">
+        <!-- id -->
+          <label for="Id">شماره ستون:</label>
+          <br>
+          <input type="text" name="Id" id="inputId" placeholder="شماره ستون رو وارد کنید"/>
+          <br>
+          <br>
+        <!-- name -->
+          <label for="Name">نام محصول:</label>
+          <br>
+          <input type="text" name="Name" id="inputName" placeholder="نام محصول را وارد کنید">
+          <br>
+          <br>
+        <!-- Price -->
+          <label for="Price">قیمت کالا:</label>
+          <br>
+          <input type="text" name="Price" id="inputPrice" placeholder="قیمت کالا را وارد کنید (به عدد)">
+          <br>
+          <br>
+        <!-- Desc -->
+          <label for="Desc">توضیحات:</label>
+          <br>
+          <input type="text" name="Desc" id="inputDesc" placeholder="توضیحات مربوطه به کالا">
+          <br>
+          <br>
+        <!-- Image -->
+          <label for="Image">تصویر عکس</label>
+          <br>
+          <input type="url" name="Image" id="inputImage" placeholder="https://book.jpg">
+          <br>
+          <br>
+        <!-- Buttons -->
+          <input type="submit" onclick="submit()" value="ثبت کالا">
+          <input type="reset" onclick="reset()" value="ریست کردن">
+      </div>
+    </main>
+    <script src="../js/app.js"></script>
+  </body>
+</html>
