@@ -1,148 +1,0 @@
-قطعاً! 🌟  
-الان کامل و مرحله‌به‌مرحله بهت نشون می‌دم چطور با **Node.js** یک سایت با ظاهر HTML/CSS/JS بسازی که به **SQLite** وصل بشه و اطلاعاتو ذخیره کنه یا نمایش بده.
-
----
-
-## 🔧 ابزارهایی که نیاز داریم:
-
-- Node.js (نصب شده روی سیستم)
-- SQLite (ماژول `better-sqlite3` یا `sqlite3`)
-- Express.js (برای ساخت سرور)
-- Body-parser (برای گرفتن اطلاعات از فرم)
-
----
-
-## 💡 مرحله 1: ساخت پوشه پروژه
-
-```bash
-mkdir my-sqlite-app
-cd my-sqlite-app
-npm init -y
-npm install express body-parser sqlite3
-```
-
----
-
-## 📁 ساختار پروژه
-
-```
-my-sqlite-app/
-│
-├── server.js           ← فایل اصلی بک‌اند
-├── database.db         ← دیتابیس SQLite
-├── public/
-│   └── index.html      ← فرم HTML
-```
-
----
-
-## 🧠 مرحله 2: ساخت دیتابیس SQLite
-
-```js
-// create-db.js
-const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('database.db');
-
-db.serialize(() => {
-  db.run("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT)");
-});
-
-db.close();
-```
-
-اجرا کن:
-```bash
-node create-db.js
-```
-
----
-
-## 🖥️ مرحله 3: ساخت سرور `server.js`
-
-```js
-const express = require('express');
-const bodyParser = require('body-parser');
-const sqlite3 = require('sqlite3').verbose();
-const path = require('path');
-
-const app = express();
-const db = new sqlite3.Database('database.db');
-
-// پشتیبانی از فرم‌ها
-app.use(bodyParser.urlencoded({ extended: false }));
-
-// نمایش فایل‌های public
-app.use(express.static(path.join(__dirname, 'public')));
-
-// ذخیره نام در دیتابیس
-app.post('/submit', (req, res) => {
-  const name = req.body.name;
-  db.run('INSERT INTO users (name) VALUES (?)', [name], (err) => {
-    if (err) return res.send('خطا در ذخیره');
-    res.send('اطلاعات با موفقیت ذخیره شد!');
-  });
-});
-
-// اجرای سرور
-app.listen(3000, () => {
-  console.log('Server is running on http://localhost:3000');
-});
-```
-
----
-
-## 📝 مرحله 4: ساخت فرم HTML (در public/index.html)
-
-```html
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>فرم ذخیره در SQLite</title>
-</head>
-<body>
-  <h1>ثبت نام</h1>
-  <form action="/submit" method="POST">
-    <input name="name" placeholder="نام شما" required>
-    <button type="submit">ارسال</button>
-  </form>
-</body>
-</html>
-```
-
----
-
-## 🚀 مرحله 5: اجرا
-
-```bash
-node server.js
-```
-
-حالا برو به مرورگر و بزن:
-
-👉 http://localhost:3000
-
-فرم رو پر کن → روی "ارسال" کلیک کن → دیتا توی SQLite ذخیره می‌شه!
-
----
-
-## ✨ مرحله 6 (اختیاری): نمایش اطلاعات ذخیره‌شده
-
-توی سرور این رو اضافه کن:
-
-```js
-app.get('/users', (req, res) => {
-  db.all('SELECT * FROM users', (err, rows) => {
-    if (err) return res.send('خطا در خواندن دیتا');
-    res.json(rows);
-  });
-});
-```
-
-بعد از این، اگه بری به http://localhost:3000/users دیتای ذخیره‌شده رو می‌بینی 😍
-
----
-
-اگه بخوای می‌تونم همین پروژه رو برات زیبا هم بکنم با CSS یا AJAX هم بهش اضافه کنیم تا فرم بدون رفرش شدن صفحه کار کنه.
-
-بگی چی دوست داری بهش اضافه کنیم؟ 🙌
