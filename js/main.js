@@ -113,18 +113,6 @@ const courses = document.querySelector("#courses");
 const CallMe = document.querySelector("#CallMe");
 const Home = document.querySelector('#Home')
 
-function scroll_AboutUs(){
-    window.scrollTo(0, 400);
-}
-
-function scroll_Courses(){
-    window.scrollTo(0,1700)
-}
-
-function scroll_CallMe(){
-    window.scrollTo(0,5000)
-}
-
-function scroll_Home(){
-    window.scrollTo(0,0)
+function scroll_site(x,y){
+    window.scrollTo(x, y);
 }

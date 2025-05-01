@@ -1,3 +1,12 @@
+@font-face {
+    font-family: font;
+    src: url(../font/Vazir-Light.woff2);
+}
+
+*,body{
+    font-family: font;
+}
+
 a
 .section-title::after {
     position: absolute;
@@ -6,7 +15,7 @@ a
     height: 2px;
     bottom: 5px;
     left: -60px;
-    background: var(--primary);
+    background: var(--bs-indigo);
     z-index: -1;
 }
 
@@ -259,4 +268,33 @@ a
 .carousel-btn:hover {
     opacity: 0.9;
     transform: scale(1.05);
+}
+
+.btn-primary {
+    background-color: #6f42c1;
+    border-color: #6f42c1;
+}
+
+.btn-primary:hover {
+    background-color: #5a2f99;
+    border-color: #5a2f99;
+}
+
+
+/* اگر متن‌ها کلاس خاصی داشته باشن، مثلا .text-fireshadow */
+.text-fireshadow {
+    color: #6f42c1;
+}
+
+/* اگر آیکون‌ها هم باید تغییر رنگ بدن */
+.icon-class {
+    color: #6f42c1;
+}
+
+a {
+    color: #6f42c1;
+}
+
+a:hover {
+    color: #5a2f99;
 }
